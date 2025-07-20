@@ -51,11 +51,9 @@ jobs:
           # to the 'main' branch. For pull requests, it will build but not push.
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           # Defines the tags for your Docker image.
-          # The image will be tagged with 'latest' and also with the commit SHA.
+          # Comments are removed from this block as they cause invalid tag errors.
           tags: |
-            # Tag the image with 'latest'
             ${{ secrets.DOCKER_USERNAME }}/cats_dogs_classifier:latest
-            # Tag the image with the specific Git commit SHA for versioning
             ${{ secrets.DOCKER_USERNAME }}/cats_dogs_classifier:${{ github.sha }}
           # Configure caching using GitHub Actions' built-in cache for faster builds.
           cache-from: type=gha
