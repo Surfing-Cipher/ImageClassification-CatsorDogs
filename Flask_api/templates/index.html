@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cat/Dog Classifier</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <h1 class="title">🐾 Cat or Dog? Let's Find Out! 🐶</h1>
+
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+          <label for="file-upload" class="custom-file-upload">
+            Choose Image
+          </label>
+          <input
+            id="file-upload"
+            type="file"
+            name="file"
+            accept="image/*"
+            required
+          />
+          <span id="file-name" class="file-name">No file chosen</span>
+
+          <button type="submit" class="btn-predict">Predict</button>
+        </form>
+        <p class="description">
+          Upload an image of a cat or a dog to see the magic happen!
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // JavaScript to display the chosen file name
+      document
+        .getElementById("file-upload")
+        .addEventListener("change", function () {
+          var fileName = this.files[0] ? this.files[0].name : "No file chosen";
+          document.getElementById("file-name").textContent = fileName;
+        });
+    </script>
+  </body>
+</html>

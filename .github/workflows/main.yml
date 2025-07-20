@@ -1,0 +1,46 @@
+# your_flask_app/.github/workflows/main.yml
+
+name: CI/CD Pipeline for Flask Image Classifier
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+  pull_request:
+    branches:
+      - main # Trigger on pull requests to the main branch
+
+jobs:
+  build-and-push-docker-image:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4 # Action to check out your code
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3 # Action to log into Docker Hub
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }} # Use GitHub Secret for username
+          password: ${{ secrets.DOCKER_TOKEN }} # Use GitHub Secret for token
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3 # Action to set up Docker Buildx (for better caching and multi-platform builds)
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5 # Action to build and push Docker images
+        with:
+          context: . # Build from the current directory (where Dockerfile is)
+          file: ./Dockerfile # Specify the Dockerfile path
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }} # Only push on 'main' branch pushes
+          tags: | # Define image tags
+            ${{ secrets.DOCKER_USERNAME }}/cats_dogs_classifier:latest # Tag with 'latest'
+            ${{ secrets.DOCKER_USERNAME }}/cats_dogs_classifier:${{ github.sha }} # Tag with commit SHA (for specific versioning)
+          cache-from: type=gha # Enable caching from GitHub Actions cache
+          cache-to: type=gha,mode=max # Enable caching to GitHub Actions cache (max mode for aggressive caching)
+
+      - name: Verify Image (Optional - for debugging)
+        run: echo "Docker image built and potentially pushed. Check Docker Hub for ${{ secrets.DOCKER_USERNAME }}/cats_dogs_classifier"
+        # You could add steps here to run a quick test on the built image
+        # e.g., docker run -d -p 5000:5000 your_username/cats_dogs_classifier:latest
+        # then curl http://localhost:5000 to check if the app is running.

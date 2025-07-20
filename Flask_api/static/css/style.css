@@ -1,0 +1,219 @@
+/* your_flask_app/static/css/style.css */
+
+/* --- General Styling --- */
+:root {
+  --primary-color: #6a0572; /* Deep Violet */
+  --secondary-color: #9d00b3; /* Lighter Violet */
+  --accent-color: #ff9f1c; /* Vibrant Orange */
+  --text-color: #333;
+  --light-text-color: #f8f8f8;
+  --background-color: #e0e0e0; /* Light Gray */
+  --card-background: #ffffff;
+  --border-color: #ddd;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: "Poppins", sans-serif; /* Modern, clean font */
+  background: linear-gradient(
+    135deg,
+    var(--background-color) 0%,
+    #c0c0c0 100%
+  ); /* Subtle gradient */
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 40px); /* Adjust for body padding */
+}
+
+.container {
+  background-color: var(--card-background);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px var(--shadow-medium); /* More prominent shadow */
+  text-align: center;
+  max-width: 550px; /* Slightly wider for better layout */
+  width: 100%;
+  transition: transform 0.3s ease-in-out; /* Subtle hover effect */
+}
+
+.container:hover {
+  transform: translateY(-5px);
+}
+
+.title {
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  font-size: 2.2em; /* Larger title */
+  font-weight: 600; /* Bolder */
+  letter-spacing: -0.5px;
+}
+
+.description {
+  color: #666;
+  font-size: 1.1em;
+  margin-top: 25px;
+  line-height: 1.6;
+}
+
+/* --- Form Styling --- */
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Spacing between elements */
+}
+
+.custom-file-upload {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
+  padding: 12px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.custom-file-upload:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+input[type="file"] {
+  display: none; /* Hide the default file input */
+}
+
+.file-name {
+  font-size: 0.9em;
+  color: #777;
+  margin-top: -10px; /* Adjust spacing */
+}
+
+.btn-predict {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.btn-predict:hover {
+  background-color: #e68a00; /* Darker orange on hover */
+  transform: translateY(-2px);
+}
+
+/* --- Result Page Styling --- */
+.result-text {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.prediction-label {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 1.3em;
+}
+
+.confidence-score {
+  font-weight: 600;
+  color: var(--accent-color);
+  font-size: 1.2em;
+}
+
+.uploaded-image {
+  max-width: 100%;
+  height: auto;
+  border: 3px solid var(--border-color); /* More prominent border */
+  border-radius: 8px;
+  margin: 25px auto; /* Centered with vertical margin */
+  display: block; /* Ensures margin auto works horizontally */
+  box-shadow: 0 5px 15px var(--shadow-light);
+}
+
+.btn-link {
+  display: inline-block; /* Treat like a button */
+  background-color: var(--secondary-color);
+  color: var(--light-text-color);
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none; /* Remove underline */
+  font-size: 1em;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 15px; /* Space from image */
+}
+
+.btn-link:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* --- Flash Messages --- */
+.flashes {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+  text-align: left; /* Align text within flash message */
+}
+
+.flashes li {
+  background-color: var(--error-color); /* Red for errors/flash messages */
+  color: white;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  font-weight: 500;
+  box-shadow: 0 2px 5px var(--shadow-light);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-weight: 500;
+}
+
+/* --- Basic Responsiveness --- */
+@media (max-width: 600px) {
+  .container {
+    padding: 25px;
+    margin: 10px; /* Smaller margin on small screens */
+  }
+
+  .title {
+    font-size: 1.8em;
+  }
+
+  .custom-file-upload,
+  .btn-predict,
+  .btn-link {
+    width: 100%; /* Full width buttons on small screens */
+    padding: 12px 15px;
+    box-sizing: border-box;
+  }
+
+  .file-name {
+    margin-bottom: 15px;
+  }
+}
