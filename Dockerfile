@@ -1,7 +1,7 @@
 # your_flask_app/Dockerfile
 
 # Use a slim Python base image for a smaller final image size
-FROM python:3.10-slim-buster
+FROM python:3.11-slim-buster
 
 # Set the working directory inside the container
 WORKDIR /app
