@@ -1,0 +1,29 @@
+# Virtual environment
+venv/
+.env/
+
+# Byte-code files
+*.pyc
+__pycache__/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Local data or logs
+*.log
+*.sqlite3
+*.db
+
+# Model files (if not intended for git - but we are tracking .keras in this case)
+# If you had very large temporary models or checkpoints, you might add:
+# *.h5
+# *.keras
+# checkpoints/
+
+# Uploaded images (if in a specific dir)
+/static/uploads/
